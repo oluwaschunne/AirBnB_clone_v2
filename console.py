@@ -128,14 +128,20 @@ class HBNBCommand(cmd.Cmd):
         for i in range(1, len(lists)):
             key, value = tuple(lists[i].split("="))
             if value[0] == '"':
-                value.strip('"').replace("_", " ")
+                value = value.strip('"').replace("_", " ")
+            else:
+                try:
+                    value = eval(value)
+                except (SyntaxError, NameError):
+                        continue
             kwargs[key] = value
-
-
-        new_instance = HBNBCommand.classes[lists[0]](**kwargs)
-        storage.save()
+        if kwargs == {}:
+            new_instance = HBNBCommand.classes[lists[0]]()
+        else:
+            new_instance = HBNBCommand.classes[lists[0]](**kwargs)
+            storage.new(new_instance)
         print(new_instance.id)
-        storage.save()
+        new_instance.save()
 
     def help_create(self):
         """ Help information for the create method """
