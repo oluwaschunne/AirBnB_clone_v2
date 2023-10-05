@@ -8,7 +8,7 @@
 
 from fabric.api import put, run, env, sudo
 from os.path import exists
-env.hosts = ['100.25.153.121', '100.25.23.179']
+env.hosts = ['100.25.23.179', '100.25.153.121']
 
 #run("rm -rf /data/web_static/releases/web_static_20230506221613/images")
 #run("rm -rf /data/web_static/releases/web_static_20230506221613/styles")
