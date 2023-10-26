@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Write a script that starts a Flask web application"""
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -33,6 +33,22 @@ def pyt(text="is_cool"):
 def numm(n):
     """return message"""
     return "{} is a number".format(n)
+
+
+@app.route("/number_template/<int:n>", strict_slashes=False)
+def numm2(n):
+    """return message"""
+    return render_template("5-number.html", num=n)
+
+
+@app.route("/number_odd_or_even/<int:n>", strict_slashes=False)
+def evenodd(n):
+    """return message"""
+    if int(n) % 2 == 0:
+        tp = "even"
+    else:
+        tp = "odd"
+    return render_template("6-number_odd_or_even.html", num=n, tp=tp)
 
 
 if __name__ == "__main__":
